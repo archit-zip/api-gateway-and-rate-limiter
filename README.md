@@ -9,12 +9,5 @@ Redis
 express-rate-limit
 rate-limit-redis
 
-Overview:
-Client
-  ↓
-API Gateway
-  ├── Rate Limiting (Redis)
-  ├── JWT Authentication
-  └── Proxy Routing
-          ↓
-     Backend Services
+Architecture Overview:
+Client -> API Gateway -> Rate Limiting (Redis) -> JWT Authentication -> Proxy Routing -> Backend Services
