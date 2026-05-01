@@ -3,5 +3,6 @@ dotenv.config();
 
 export default {
     port: process.env.PORT || 8080,
-    redis_url: process.env.REDIS_URL
+    redisUrl: process.env.REDIS_URL,
+    jwtSecret: process.env.JWT_SECRET
 };
