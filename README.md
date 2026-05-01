@@ -1,13 +1,77 @@
-# api-gateway-and-rate-limiter
-This project is a Node.js–based API Gateway designed to sit in front of multiple backend services and act as a single entry point for client requests. It handles authentication, rate limiting, and request routing, enabling secure and scalable microservice communication. The gateway verifies JWT-based authentication, enforces distributed rate limits using Redis, and forwards validated requests to the appropriate backend services. This architecture closely mirrors production-grade gateway patterns used in modern microservice systems.
+# API Gateway with JWT Authentication & Distributed Rate Limiting
 
-Tech stack: 
-Node.js
-Express.js
-JWT (jsonwebtoken)
-Redis
-express-rate-limit
-rate-limit-redis
+This project is an API Gateway built using Node.js and Express that acts as a centralized entry point for multiple backend services. It implements JWT-based authentication, Redis-backed distributed rate limiting, and dynamic service routing, along with a Bootstrap + EJS dashboard for testing and interaction. The system simulates real-world microservice architecture patterns used in modern backend systems.
 
-Architecture Overview:
-Client -> API Gateway -> Rate Limiting (Redis) -> JWT Authentication -> Proxy Routing -> Backend Services
+## Features
+
+*  **JWT Authentication Middleware**
+
+  * Secures all incoming requests
+  * Verifies tokens before forwarding to services
+
+*  **Distributed Rate Limiting (Redis)**
+
+  * Prevents abuse using shared Redis store
+  * Scales across multiple instances
+
+*  **Dynamic API Gateway Routing**
+
+  * Routes requests to multiple services (`/users`, `/orders`, `/products`)
+  * Easily extendable via service registry
+
+*  **Centralized Configuration**
+
+  * Environment-based config management
+  * Avoids runtime inconsistencies
+
+*  **Interactive Dashboard (EJS + Bootstrap)**
+
+  * Select service, method, and payload
+  * Send authenticated requests directly from UI
+
+*  **Request Logging & Error Handling**
+
+  * Uses `morgan` for logging
+  * Centralized error middleware
+
+##  Tech Stack
+
+* Backend: Node.js, Express.js
+* Authentication: JWT (`jsonwebtoken`)
+* Rate Limiting: `express-rate-limit`, `rate-limit-redis`
+* Cache/Store: Redis
+* Frontend: EJS, Bootstrap
+* Logging: Morgan
+
+## Architecture Overview
+
+```
+Client (Postman / Dashboard)
+        ↓
+API Gateway (Express)
+        ↓
+Rate Limiter (Redis)
+        ↓
+JWT Authentication Middleware
+        ↓
+Proxy Controller (Routing)
+        ↓
+Backend Services (Users / Orders / Products)
+```
+
+---
+
+## Project Structure
+
+```
+src/
+ ├── config/              # Environment & config management
+ ├── middleware/          # Auth + rate limiter
+ ├── services/            # Service registry
+ ├── controllers/         # Proxy logic
+ ├── routes/              # Gateway routes
+ ├── views/               # EJS frontend
+ ├── public/              # Static assets
+ ├── app.js               # App setup
+server.js                 # Entry point
+```
